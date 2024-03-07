@@ -1,0 +1,9 @@
+#ignoring installed packages
+node_modules
+.vscode
+
+#ignoring installed dependency configuration
+*.env
+
+#ignoring test files
+test
