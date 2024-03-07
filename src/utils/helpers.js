@@ -47,8 +47,8 @@ module.exports = {
   },
 
   paginationRequest: (req, options = {}) => {
-    const page = parseInt(req.query.page) || options.page || 1
-    let limit = parseInt(req.query.limit) || options.limit || 10
+    const page = parseInt(req.page) || options.page || 1
+    let limit = parseInt(req.limit) || options.limit || 10
     const maxLimit = options.maxLimit || 100
     if (limit > maxLimit) limit = maxLimit
     const offset = (page - 1) * limit
