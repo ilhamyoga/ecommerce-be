@@ -8,31 +8,33 @@ const hash = (string, salt = '') => {
   return hash
 }
 
+const generateRandomString = (size, mode = '111') => {
+  // '100': [0-9]
+  // '010': [A-B]
+  // '101': [0-9] + [a-b]
+  // '111': [0-9] + [A-B] + [a-b]
+  const r = (n) => Math.floor(Math.random() * n)
+  const m = [...mode]
+    .map((v, i) => parseInt(v, 10) * (i + 1))
+    .filter(Boolean)
+    .map((v) => v - 1)
+  return [...new Array(size)].reduce(
+    (a) =>
+      a +
+      String.fromCharCode(
+        [48 + r(10), 65 + r(26), 97 + r(26)][m[r(m.length)]]
+      ),
+    ''
+  )
+}
+
 module.exports = {
   hash,
   hashPassword: (password) => {
     return hash(password, config.salt_pass)
   },
 
-  generateRandomString: (size, mode = '111') => {
-    // '100': [0-9]
-    // '010': [A-B]
-    // '101': [0-9] + [a-b]
-    // '111': [0-9] + [A-B] + [a-b]
-    const r = (n) => Math.floor(Math.random() * n)
-    const m = [...mode]
-      .map((v, i) => parseInt(v, 10) * (i + 1))
-      .filter(Boolean)
-      .map((v) => v - 1)
-    return [...new Array(size)].reduce(
-      (a) =>
-        a +
-        String.fromCharCode(
-          [48 + r(10), 65 + r(26), 97 + r(26)][m[r(m.length)]]
-        ),
-      ''
-    )
-  },
+  generateRandomString,
 
   generateRandomNumber: (min, max, decimal) => {
     const number = Math.random() * (max - min) + min
