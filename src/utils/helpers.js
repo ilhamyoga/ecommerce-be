@@ -2,13 +2,14 @@ const { Op } = require('sequelize');
 const bcrypt = require('bcryptjs');
 const config  = require('../config');
 
-module.exports = {
-  hash: (string, salt = '') => {
-    const hashSalt = bcrypt.genSaltSync(10)
-    const hash = bcrypt.hashSync(string + salt, hashSalt)
-    return hash
-  },
+const hash = (string, salt = '') => {
+  const hashSalt = bcrypt.genSaltSync(10)
+  const hash = bcrypt.hashSync(string + salt, hashSalt)
+  return hash
+}
 
+module.exports = {
+  hash,
   hashPassword: (password) => {
     return hash(password, config.salt_pass)
   },
