@@ -5,13 +5,13 @@ const config = require('../../config');
 const catchAsync = require('../../utils/catchAsync');
 const response = require('../../utils/response');
 const { generateRandomString } = require('../../utils/helpers');
-const { Users, Sessions, Administrators } = require('../../db/mysql/models');
+const { Users, Sessions } = require('../../db/mysql/models');
 
 const accessTokenCookieOptions = {
   maxAge: parseInt(config.access_token_expiration * 1000),
   httpOnly: true,
   sameSite: 'none',
-  secure: true
+  secure: true,
 }
 
 const handleSignInSession = async (user, role) => {
