@@ -3,7 +3,8 @@
 const response = require('../../utils/response');
 const catchAsync = require('../../utils/catchAsync');
 const { paginationRequest } = require('../../utils/helpers');
-const { sequelize, Orders, Products, OrderProduct } = require('../../db/mysql/models');
+const { sequelize, Orders, Products, OrderProduct, OrderPayments } = require('../../db/mysql/models');
+const mitrans = require('../../services/mitrans');
 
 module.exports = {
   list: catchAsync(async (req, res) => {
@@ -107,8 +108,30 @@ module.exports = {
             transaction: t
           })
         }
+        
+        // Create charge
+        const charge = await mitrans.createChargeBNI({
+          amount: totalPrice,
+          orderId: order.orderCode
+        })
 
-        return res.status(200).json(response({ data: order }))
+        // Create order payment
+        await order.createPayment({
+          orderId: order.id,
+          paymentMethod: 'bni_va',
+          proof: charge.transaction_id,
+        }, { transaction: t })
+
+        return res.status(200).json(response({ 
+          data: {
+            ...order.dataValues,
+            products: orderProducts,
+            payment: {
+              method: 'bni_va',
+              charge
+            }
+          }
+        }))
       } catch (error) {
         throw error
       }

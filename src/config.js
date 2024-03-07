@@ -18,4 +18,7 @@ CONFIG.db_pass = process.env.DB_PASS || ''
 
 CONFIG.access_token_expiration = process.env.ACCESS_TOKEN_EXPIRATION || 60 * 60 * 24 * 7 // 7 days
 
+CONFIG.midtrans_client_key = process.env.MIDTRANS_CLIENT_KEY || ''
+CONFIG.midtrans_server_key = process.env.MIDTRANS_SERVER_KEY || ''
+
 module.exports = CONFIG
