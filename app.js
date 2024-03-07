@@ -15,6 +15,10 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+// COOKIE PARSER
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
+
 // HEADER HELMET
 const helmet = require('helmet');
 app.use(helmet());
