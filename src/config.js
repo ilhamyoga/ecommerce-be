@@ -16,4 +16,6 @@ CONFIG.db_name = process.env.DB_NAME || 'ecommerce_db'
 CONFIG.db_user = process.env.DB_USER || 'root'
 CONFIG.db_pass = process.env.DB_PASS || ''
 
+CONFIG.access_token_expiration = process.env.ACCESS_TOKEN_EXPIRATION || 60 * 60 * 24 * 7 // 7 days
+
 module.exports = CONFIG
