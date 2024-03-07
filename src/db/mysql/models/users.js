@@ -1,6 +1,6 @@
 'use strict';
-const { generateRandomString, hashPassword } = require('../../utils/helpers');
-const enums = require('../enums');
+const { generateRandomString, hashPassword } = require('../../../utils/helpers');
+const enums = require('../../../utils/enums');
 
 module.exports = (sequelize, DataTypes) => {
   const Users = sequelize.define('Users', {
@@ -73,7 +73,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     hooks: {
       beforeCreate: (user, options) => {
-        user.userUid = generateRandomString(10)
+        user.userCode = generateRandomString(10)
       }
     }
   })

@@ -1,6 +1,6 @@
 'use strict';
-const enums = require('../../utils/enums');
-const { generateUid } = require('../../utils/helpers');
+const enums = require('../../../utils/enums');
+const { generateUid } = require('../../../utils/helpers');
 
 module.exports = (sequelize, DataTypes) => {
   const Orders = sequelize.define('Orders', {

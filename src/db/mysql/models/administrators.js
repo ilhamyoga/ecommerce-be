@@ -1,5 +1,5 @@
 'use strict';
-const enums = require('../../utils/enums');
+const enums = require('../../../utils/enums');
 
 module.exports = (sequelize, DataTypes) => {
   const Administrators = sequelize.define('Administrators', {
