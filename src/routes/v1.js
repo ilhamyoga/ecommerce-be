@@ -16,6 +16,7 @@ const guard = [cors.whitelist, bearer]
 module.exports = (app) => {
   // ADMIN
   app.use('/admin/auth', guard, adminRouter.authRouter);
+  app.use('/admin/products', guard, adminRouter.productsRouter);
 
   // USER
   app.use('/auth', guard, userRouter.authRouter);
