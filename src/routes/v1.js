@@ -21,6 +21,7 @@ module.exports = (app) => {
   // USER
   app.use('/auth', guard, userRouter.authRouter);
   app.use('/products', guard, userRouter.productsRouter);
+  app.use('/orders', guard, userRouter.ordersRouter);
 
   // catch 404 and forward to error handler
   app.use(cors.allowAll, (_, res) => {
