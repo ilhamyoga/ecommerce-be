@@ -9,6 +9,7 @@ const cors = require('../middlewares/cors');
 // ROUTES
 const adminRouter = require('./admin');
 const userRouter = require('./user');
+const webhookRouter = require('./webhook');
 
 const guard = [cors.whitelist, bearer]
 
@@ -22,6 +23,9 @@ module.exports = (app) => {
   app.use('/auth', guard, userRouter.authRouter);
   app.use('/products', guard, userRouter.productsRouter);
   app.use('/orders', guard, userRouter.ordersRouter);
+
+  // WEBHOOK
+  app.use('/webhook', webhookRouter.webhookRouter);
 
   // catch 404 and forward to error handler
   app.use(cors.allowAll, (_, res) => {
